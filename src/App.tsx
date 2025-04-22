@@ -34,14 +34,12 @@ function App() {
       },
     ];
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setNewTask("");
   };
 
   const deleteTask = (idToRemove: string) => {
     const updatedTasks = tasks.filter((task) => task.id !== idToRemove);
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
   const openEditModal = (id: string) => {
@@ -68,15 +66,21 @@ function App() {
     );
 
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setEditId(null);
   };
 
   useEffect(() => {
-    const savedTasks = localStorage.getItem("tasks");
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks));
-    }
+    fetch("/tasks.json")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load tasks.json");
+        return res.json();
+      })
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((err) => {
+        console.error("Error loading tasks.json:", err);
+      });
   }, []);
 
   return (

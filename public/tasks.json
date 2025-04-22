@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "name": "Zadanie testowe",
+    "difficulty": "easy",
+    "date": "2025-04-18"
+  },
+  {
+    "id": "2",
+    "name": "Drugie zadanie",
+    "difficulty": "medium",
+    "date": "2025-04-20"
+  }
+]
