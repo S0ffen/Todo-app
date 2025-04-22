@@ -15,7 +15,6 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const [newTask, setNewTask] = useState("");
-  const [deletingIndex, setDeletingIndex] = useState<string | null>(null);
 
   const [editId, setEditId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
@@ -40,13 +39,9 @@ function App() {
   };
 
   const deleteTask = (idToRemove: string) => {
-    setDeletingIndex(idToRemove);
-    setTimeout(() => {
-      const updatedTasks = tasks.filter((task) => task.id !== idToRemove);
-      setTasks(updatedTasks);
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      setDeletingIndex(null);
-    }, 300);
+    const updatedTasks = tasks.filter((task) => task.id !== idToRemove);
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
   const openEditModal = (id: string) => {
